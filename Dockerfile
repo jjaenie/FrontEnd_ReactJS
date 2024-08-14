@@ -1,11 +1,11 @@
 # base image
-FROM node:20.11.1-alpine3.19 as build
+FROM node:20.11.1-alpine3.19 AS build
 
 # set working directory
 WORKDIR /app
 
 # exposing all our Node.js binaries
-ENV PATH /app/node_modules/.bin:$PATH
+ENV PATH=/app/node_modules/.bin:$PATH
 
 # Copy package.json
 COPY package.json /app/package.json
@@ -14,6 +14,7 @@ COPY package.json /app/package.json
 RUN npm install
 
 # add app
+# 현재 폴더에 있는 모든 파일들을 복사 이때 필요한게 gitignore
 COPY . /app
 
 # build app
